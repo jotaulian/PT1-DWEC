@@ -14,21 +14,22 @@ class Zombie {
 // EJERCICIO 1
 //Clase Jugador
 class Jugador {
-    constructor(nombre, ocupacion, faccion) {
+    constructor(nombre, ocupacion, puntosVida, faccion) {
         this.nombre = nombre;
         this.ocupacion = ocupacion;
-        this.puntosVida = 100;
+        this.puntosVida = puntosVida;
         this.faccion = faccion;
+        this.maxPuntosVida = 100;
     }
  
     toString(){
-        console.log(`Nombre: ${this.nombre}, Ocupación: ${this.ocupacion}, Puntos de Vida: ${this.puntosVida}, Facción: ${this.faccion}`);
+        console.log(`Nombre: ${this.nombre}, Ocupación: ${this.ocupacion}, Puntos de Vida: ${this.puntosVida}, Facción: ${this.faccion}, Máximo de puntos de vida: ${this.maxPuntosVida}`);
     }
 }
 
 // Creamos 2 jugadores
-let j1 = new Jugador('Adam', 'Arquitecto', 'Liberal');
-let j2 = new Jugador('Pablo', 'Abogado', 'Socialista');
+let j1 = new Jugador('Adam', 'Arquitecto',70 , 'Liberal');
+let j2 = new Jugador('Pablo', 'Abogado', 80, 'Socialista');
 // Creamos una matriz que contiene los jugadores
 let listaJugadores = [j1, j2];
 
@@ -37,12 +38,18 @@ let listaJugadores = [j1, j2];
 // Clase Abominacion
 class Abominacion extends Zombie{
     ataqueMultiple(objetivo){
-        super.atacar(objetivo);
-        super.atacar(objetivo);
-        super.atacar(objetivo);
+        for (let i = 0; i < 3; i++) {
+            super.atacar(objetivo);
+        }
     }
 }
 
+// Datos de los jugadores:
+listaJugadores.forEach(jugador => {
+    jugador.toString();
+});
+
+// Creamos Abominación y probamos ataque:
 let z1 = new Abominacion('Destructor', 100, 25);
 z1.ataqueMultiple(j1.nombre);
 
